@@ -1,26 +1,17 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ChoiceList from './components/ChoiceList';
-import ChoiceResult from './components/ChoiceResult';
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Cards from "./components/cards";
 
 function App() {
 
-  const navLinks = [
-    { text: 'Home', href: '/' },
-    { text: 'About', href: '/about' },
-    { text: 'Contact', href: '/contact' }
-  ];
-
   return (
-    <Router>
-      <div>
-      <Navbar brandName="Monty Hall Problem" links={navLinks} />
-        <Routes>
-          <Route path="/" element={<ChoiceList />} />
-          <Route path="/result" element={<ChoiceResult />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      <main className="flex-grow-1">
+        <Cards />
+      </main>
+      <Footer />
+    </div>
   );
 }
 
