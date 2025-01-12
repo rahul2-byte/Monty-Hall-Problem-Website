@@ -1,0 +1,20 @@
+{
+  "name": "monty",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahul2-byte/Monty-Hall-Problem-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahul2-byte/Monty-Hall-Problem-Website/issues"
+  },
+  "homepage": "https://github.com/rahul2-byte/Monty-Hall-Problem-Website#readme",
+  "description": ""
+}

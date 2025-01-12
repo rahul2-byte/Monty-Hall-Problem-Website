@@ -11,7 +11,16 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Backend\\test\\main.test.js"
+            "program": "${workspaceFolder}\\Backend\\node_modules\\jest\\bin\\jest.js",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Frontend Tests",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\Frontend\\node_modules\\jest\\bin\\jest.js"
         }
     ]
 }

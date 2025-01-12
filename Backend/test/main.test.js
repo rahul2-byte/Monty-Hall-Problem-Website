@@ -22,7 +22,7 @@ describe('Backend API Tests', () => {
     selectedCards = [];
   });
 
-  test('POST /api/card-selection - successful card selection', async () => {
+  it('POST /api/card-selection - successful card selection', async () => {
     const response = await request(app)
       .post('/api/card-selection')
       .send({ selectedCard: 1 });
@@ -33,7 +33,7 @@ describe('Backend API Tests', () => {
     expect(selectedCards[0].card).toBe(1);
   });
 
-  test('POST /api/card-selection - handles missing card number', async () => {
+  it('POST /api/card-selection - handles missing card number', async () => {
     const response = await request(app)
       .post('/api/card-selection')
       .send({});
@@ -43,7 +43,7 @@ describe('Backend API Tests', () => {
     expect(selectedCards[0].card).toBeUndefined();
   });
 
-  test('POST /api/card-selection - stores timestamp', async () => {
+  it('POST /api/card-selection - stores timestamp', async () => {
     const response = await request(app)
       .post('/api/card-selection')
       .send({ selectedCard: 2 });
@@ -51,7 +51,7 @@ describe('Backend API Tests', () => {
     expect(selectedCards[0].timestamp).toBeInstanceOf(Date);
   });
 
-  test('POST /api/card-selection - handles multiple selections', async () => {
+  it('POST /api/card-selection - handles multiple selections', async () => {
     await request(app)
       .post('/api/card-selection')
       .send({ selectedCard: 1 });
