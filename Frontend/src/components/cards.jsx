@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 const Cards = () => {
+  const API_URL = 'http://localhost:3001';
+
   const [selectedCard, setSelectedCard] = useState(null);
   const [flippedCard, setFlippedCard] = useState(null);
   const [allFlipped, setAllFlipped] = useState(false);
@@ -30,9 +32,10 @@ const Cards = () => {
 
       // Send selected card to backend
       try {
-        await axios.post('http://localhost:3001/api/card-selection', {
-          selectedCard: cardNumber
-        });
+            // Update axios call to use API_URL
+            await axios.post(`${API_URL}/api/card-selection`, {
+                selectedCard: cardNumber
+});
       } catch (error) {
         console.error('Error sending card selection:', error);
       }

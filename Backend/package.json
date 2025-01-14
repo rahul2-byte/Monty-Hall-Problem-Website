@@ -9,6 +9,6 @@
   },
   "scripts": {
     "start": "node main.js",
-    "test": "jest --coverage"
+    "test": "jest"
   }
 }
