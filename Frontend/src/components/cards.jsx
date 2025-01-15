@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 const Cards = () => {
@@ -76,7 +75,8 @@ const Cards = () => {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">Card Game</h2>
+      <h1 className="text-center mb-4">Monty hall problem</h1>
+      <h2 className="text-center mb-4">Select a card</h2>
       <div className="row">
         {[1, 2, 3].map(number => (
           <div key={number} className="col-md-4 mb-4">

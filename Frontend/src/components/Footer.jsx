@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 const Footer = () => {
   return (
     <footer className="bg-dark text-white py-4 mt-5">
