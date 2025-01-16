@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:5173"
+    volumes:
+      - ./frontend:/app
     depends_on:
       - backend
 
@@ -16,9 +18,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
-    environment:
-      - NODE_ENV=production
-      - PORT=3001
+    volumes:
+      - ./backend:/app
 
 networks:
   default:
