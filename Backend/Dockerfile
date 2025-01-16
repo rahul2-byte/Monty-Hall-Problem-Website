@@ -5,7 +5,7 @@ FROM node:22-alpine
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY ./src/package*.json ./
 
 # Install dependencies
 RUN npm install
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3001
 
 # Start the application
-CMD ["node", "main.js"]
+CMD ["node", "./src/main.js"]

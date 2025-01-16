@@ -9,8 +9,6 @@ services:
       - "80:5173"
     volumes:
       - ./frontend:/app
-    depends_on:
-      - backend
 
   backend:
     build:
