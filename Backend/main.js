@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const lucky_card = require("./cards.js").getLuckyCard;
+const setdata = require("./DataStore/db.js").setdata;
+const getdata = require("./DataStore/db.js").getdata;
 
 // Store the details of selected cards
 let events = [];
@@ -23,6 +25,8 @@ app.post("/api/card-selection", (req, res) => {
 
   card = sendCard(events);
   events[events.length - 1].lucky_card = card;
+  // save data to redis
+  setdata("events", JSON.stringify(events[0]));
   console.log("events", events);
   res.json({ card_to_flip: card, status: "success", success: true });
 });
@@ -30,6 +34,7 @@ app.post("/api/card-selection", (req, res) => {
 // User won the game or not
 app.post("/api/game-result", (req, res) => {
   const { selectedCard } = req.body;
+  let data = getdata("events");
   if (events[events.length - 1].lucky_card === selectedCard) {
     res.json({ status: "won", success: true });
   } else {
