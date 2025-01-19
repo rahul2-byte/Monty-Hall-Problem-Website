@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 22.x ]
-        directory: ['Monty-Hall-Problem-Website/frontend', 'Monty-Hall-Problem-Website/backend']
+        directory: ['../frontend', '../backend']
         
     steps:
       - uses: actions/checkout@v4
