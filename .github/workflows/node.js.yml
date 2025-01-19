@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 22.x ]
-        directory: ['frontend', 'backend']
+        directory: ['Monty-Hall-Problem-Website/frontend', 'Monty-Hall-Problem-Website/backend']
         
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +25,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           # cache-dependency-path: ${{ matrix.directory }}/package.json
-          
+
+      - name: List Files
+        run: ls -R
+
       - name: Install Dependencies
         working-directory: ${{ matrix.directory }}
         run: |
