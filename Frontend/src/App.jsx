@@ -5,9 +5,9 @@ import Cards from "./components/cards";
 function App() {
 
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="mx-auto font-sans">
       <Navbar />
-      <main className="flex-grow-1">
+      <main>
         <Cards />
       </main>
       <Footer />

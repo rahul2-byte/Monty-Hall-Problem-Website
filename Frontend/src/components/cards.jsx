@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 const Cards = () => {
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [flippedCard, setFlippedCard] = useState(null);
-  const [allFlipped, setAllFlipped] = useState(false);
+  const API_URL = "http://localhost:3001";
+
   const [gameStarted, setGameStarted] = useState(false);
-  const [gameMessage, setGameMessage] = useState('');
+  const [gameMessage, setGameMessage] = useState("");
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [flippedCards, setFlippedCards] = useState([]); // Track flipped cards
+  const [allFlipped, setAllFlipped] = useState(false);
 
   const startGame = () => {
     setGameStarted(true);
     setSelectedCard(null);
-    setFlippedCard(null);
+    setFlippedCards([]); // Reset flipped cards
     setAllFlipped(false);
-    setGameMessage('');
+    setGameMessage("Choose one card!!");
   };
 
   const handleCardClick = async (cardNumber) => {
@@ -22,85 +23,92 @@ const Cards = () => {
 
     if (selectedCard === null) {
       setSelectedCard(cardNumber);
-      // Randomly flip one of the other cards
-      const remainingCards = [1, 2, 3].filter(num => num !== cardNumber);
-      const randomCard = remainingCards[Math.floor(Math.random() * remainingCards.length)];
-      setFlippedCard(randomCard);
-      setGameMessage('Do you want to switch cards?');
-
       // Send selected card to backend
       try {
-        await axios.post('http://localhost:3001/api/card-selection', {
-          selectedCard: cardNumber
+        const response = await axios.post(`${API_URL}/api/card-selection`, {
+          selectedCard: cardNumber,
         });
+        // Flip the card suggested by the backend
+        if (response.data.success) setFlippedCards([response.data.card_to_flip]); // For example, log the suggestion
+        setGameMessage("Do you want to switch cards?");
+
       } catch (error) {
-        console.error('Error sending card selection:', error);
+        console.error("Error sending card selection:", error);
+        setGameMessage("Failed to process selection. Please try again. Internal server error.");
       }
-    } else if (cardNumber !== selectedCard && cardNumber !== flippedCard) {
+    } else if (
+      cardNumber !== selectedCard &&
+      !flippedCards.includes(cardNumber)
+    ) {
+      const result=  await axios.post(`${API_URL}/api/game-result`, {
+        selectedCard: cardNumber,
+      });
+
+      setFlippedCards([selectedCard, cardNumber]);
       setAllFlipped(true);
-      setGameMessage('Game Over! All cards revealed.');
+
+      if (result.data.status === "won") {
+        setGameMessage("Congratulations! You won the game.");
+      } else {
+        setGameMessage("Sorry! You lost the game. But keep it Up!!");
+      }
     }
   };
 
   const resetGame = () => {
     setGameStarted(false);
     setSelectedCard(null);
-    setFlippedCard(null);
+    setFlippedCards([]); // Reset flipped cards
     setAllFlipped(false);
-    setGameMessage('');
+    setGameMessage("");
   };
 
   const renderCard = (number) => {
     const isSelected = selectedCard === number;
-    const isFlipped = flippedCard === number || allFlipped;
+    const isFlipped = flippedCards.includes(number) || allFlipped;
 
     return (
-      <div 
-        className={`card ${isSelected ? 'bg-success' : ''} ${isFlipped ? 'bg-warning' : ''}`}
-        style={{ 
-          cursor: gameStarted ? 'pointer' : 'not-allowed',
-          minHeight: '200px',
-          opacity: gameStarted ? 1 : 0.7
-        }}
+      <div
+        className={`w-80 h-80 flex justify-center items-center text-8xl border-2 
+          rounded-lg transition-all duration-300 cursor-pointer hover:bg-blue-300 ${
+            isFlipped ? "bg-red-400" : ""
+          } ${isSelected ? "bg-green-400" : ""}`}
         onClick={() => handleCardClick(number)}
       >
         <div className="card-body text-center">
-          <h1 className="card-title">{number}</h1>
+          <h1 className="card-title">{isFlipped ? "🎉" : number}</h1>
         </div>
       </div>
     );
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">Card Game</h2>
-      <div className="row">
-        {[1, 2, 3].map(number => (
-          <div key={number} className="col-md-4 mb-4">
-            {renderCard(number)}
-          </div>
-        ))}
+    <div className="flex flex-col items-center min-h-screen bg-gray-100">
+      <h1 className="text-6xl font-bold m-10">Monty hall problem</h1>
+      <h2 className="text-center mb-6 text-2xl">Start the game!!</h2>
+      <div className="grid grid-cols-3 gap-6 m-4">
+        {[1, 2, 3].map((number) => renderCard(number))}
       </div>
-      
+
       {/* Game Message Section */}
       {gameMessage && (
         <div className="text-center my-4">
-          <h3 className="fw-bold">{gameMessage}</h3>
+          <h3 className="font-bold">{gameMessage}</h3>
         </div>
       )}
-      
+
       {/* Game Controls */}
       <div className="text-center mt-4">
         {!gameStarted ? (
-          <button 
-            className="btn btn-primary btn-lg"
+          <button
+            className="bg-blue-400 text-white px-6 py-2 rounded-lg hover:bg-blue-950"
             onClick={startGame}
           >
             Play
           </button>
         ) : (
-          <button 
-            className="btn btn-secondary btn-lg"
+          <button
+            className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700"
             onClick={resetGame}
           >
             Reset Game
