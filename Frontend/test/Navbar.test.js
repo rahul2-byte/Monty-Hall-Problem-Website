@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import Navbar from '../src/components/Navbar';
+const { render, screen } = require('@testing-library/react');
+const Navbar = require('../src/components/Navbar');
 
 describe('Navbar Component', () => {
   beforeEach(() => {

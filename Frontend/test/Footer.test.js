@@ -1,7 +1,6 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import Footer from '../src/components/Footer';
+const React = require('react');
+const { render, screen } = require('@testing-library/react');
+const Footer = require('../src/components/Footer');
 
 describe('Footer Component', () => {
   beforeEach(() => {

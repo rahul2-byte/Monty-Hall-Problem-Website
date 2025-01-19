@@ -1,7 +1,7 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import axios from 'axios';
-import Cards from '../src/components/Cards';
-import jest from 'jest';
+const { render, screen, fireEvent, waitFor } =  require('@testing-library/react');
+const axios = require('axios');
+const Cards = require('../src/components/cards');
+const jest = require('jest');
 
 // Mock axios
 jest.mock('axios');

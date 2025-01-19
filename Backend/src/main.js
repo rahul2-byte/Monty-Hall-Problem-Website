@@ -36,6 +36,7 @@ app.post("/api/game-result", (req, res) => {
   const { selectedCard } = req.body;
   let data = getdata("events");
   if (events[events.length - 1].lucky_card === selectedCard) {
+    console.log("won", data);
     res.json({ status: "won", success: true });
   } else {
     res.json({ status: "lost", success: true });
