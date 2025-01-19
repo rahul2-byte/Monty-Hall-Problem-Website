@@ -1,12 +1,7 @@
 const Redis = require("redis");
 
 // Create a Redis client
-const client = Redis.createClient({
-  socket: {
-    host: "127.0.0.1", // Redis host
-    port: 6379, // Redis port
-  },
-});
+const client = Redis.createClient(host="redis", port=6379);
 
 // Connect to Redis
 client.connect().catch((err) => {
