@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . "
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,11 @@
     "url": "https://github.com/rahul2-byte/Monty-Hall-Problem-Website/issues"
   },
   "homepage": "https://github.com/rahul2-byte/Monty-Hall-Problem-Website#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^15.14.0"
+  }
 }

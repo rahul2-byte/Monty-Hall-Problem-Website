@@ -1,36 +1,55 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: Lint Check
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ main, master, develop ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ master, develop ]
 
 jobs:
-  build:
-
+  lint:
+    name: Run ESLint
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-         working-directory: ./server/
-
+    
     strategy:
       matrix:
         node-version: [ 22.x ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+        directory: ['frontend', 'backend']
+        
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: subdir/package-lock.json
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: ${{ matrix.directory }}/package.json
+          
+      - name: Install Dependencies
+        working-directory: ${{ matrix.directory }}
+        run: |
+          npm ci
+          
+      - name: Install ESLint and Plugins
+        working-directory: ${{ matrix.directory }}
+        run: |
+          npm install --save-dev eslint@latest
+          if [ "${{ matrix.directory }}" = "frontend" ]; then
+            npm install --save-dev eslint-plugin-react@latest eslint-plugin-react-hooks@latest eslint-plugin-jsx-a11y@latest eslint-plugin-import@latest
+          else
+            npm install --save-dev eslint-plugin-node@latest eslint-plugin-security@latest
+          fi
+          
+      - name: Run ESLint
+        working-directory: ${{ matrix.directory }}
+        run: |
+          npx eslint . --ext .js,.jsx --max-warnings 0
+
+      - name: Upload ESLint Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-report-${{ matrix.directory }}
+          path: ${{ matrix.directory }}/eslint-report.json
+          retention-days: 7

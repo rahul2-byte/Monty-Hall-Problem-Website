@@ -44,6 +44,7 @@ describe('Backend API Tests', () => {
   });
 
   it('POST /api/card-selection - stores timestamp', async () => {
+    // eslint-disable-next-line no-unused-vars
     const response = await request(app)
       .post('/api/card-selection')
       .send({ selectedCard: 2 });
