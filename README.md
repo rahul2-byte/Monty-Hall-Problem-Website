@@ -57,7 +57,7 @@ Ensure you have the following installed:
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/monty-hall-problem.git
+   git clone https://github.com/rahul2-byte/Monty-Hall-Problem-Website.git
    cd monty-hall-problem
    ```
 
@@ -66,7 +66,7 @@ Ensure you have the following installed:
    docker-compose up --build
    ```
 
-3. Access the website at [http://localhost](http://localhost).
+3. Access the website at [http://localhost:80](http://localhost:80).
 
 ---
 
@@ -111,8 +111,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 If you have any questions or feedback, feel free to reach out:
 
-- **Email**: rahul.singh@example.com
-- **GitHub**: [your-username](https://github.com/your-username)
+- **Email**: rahulchand4299@gmail.com
+- **GitHub**: [rahul2-byte](https://github.com/rahul2-byte)
 
 ---
 
