@@ -31,18 +31,18 @@ The Monty Hall problem is a counterintuitive probability puzzle named after the 
 ## 💻 Tech Stack
 
 ### Frontend
-- **Framework**: [React](https://reactjs.org/)
-- **Styling**: CSS/SCSS for responsive and dynamic designs
+- **Framework**: [React](https://reactjs.org/) for website building
+- **Styling**: [tailwind](https://tailwindcss.com/) for responsive and dynamic designs
 
 ### Backend
 - **Framework**: [Node.js](https://nodejs.org/) with Express.js
 - **Database**: [MongoDB](https://www.mongodb.com/) for storing game data and user statistics
-- **Redis**: For caching and real-time updates
+- **Redis**: [Redis](https://github.com/redis/redis) For caching and real-time updates
 
 ### DevOps
 - **Containerization**: [Docker](https://www.docker.com/)
 - **Orchestration**: [Docker Compose](https://docs.docker.com/compose/)
-- **Linting**: ESLint for code quality
+- **Linting**: [ESLint](https://eslint.org/) for code quality
 
 ---
 
@@ -73,10 +73,10 @@ Ensure you have the following installed:
 ## 📊 Screenshots
 
 ### Homepage
-![Homepage Screenshot](https://via.placeholder.com/800x400?text=Homepage)
+![Homepage Screenshot](https://github.com/user-attachments/assets/66b7454b-24c0-492c-9612-a4ecb8f65de1)
 
 ### Game Interface
-![Game Screenshot](https://via.placeholder.com/800x400?text=Game+Interface)
+![Game Screenshot](https://github.com/user-attachments/assets/c29f0d19-56cc-4d9f-9a21-b19121f5b777)
 
 ---
 
